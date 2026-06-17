@@ -29,8 +29,8 @@ CREATE TABLE agents IF NOT EXIST (
   name VARCHAR(255) NOT NULL,
   specialty VARCHAR(255),
   is_active BOOLEAN DEFAULT TRUE,
-  completed_missions INT,
-  failed_missions INT,
+  completed_missions INT DEFAULT 0,
+  failed_missions INT DEFAULT 0,
   agent_rank ENUM(Junior, Senior, Commander)
         """
 );
