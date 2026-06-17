@@ -113,3 +113,7 @@ docker run -d --name intelligence-mysql -e MYSQL_ROOT_PASSWORD=1234 \
  import uvicorn
  if __name__ == "__main__":
     uvicorn.run("main:app", port=8000, host="127.0.0.1", reload=True)
+
+### Run on a virtual environment
+python -m venv Intelligence-proj
+Intelligence-proj\Scripts\activate
