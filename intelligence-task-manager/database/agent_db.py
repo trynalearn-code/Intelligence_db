@@ -20,7 +20,7 @@ class AgentDB:
     
     def get_all_agents():
         conn=get_connection()
-        cursor=conn.cursor()
+        cursor=conn.cursor(dictionary=True)
         cursor.execute(
             """
         SELECT * FROM agents
@@ -33,7 +33,7 @@ class AgentDB:
     
     def get_agent_by_id(id):
         conn=get_connection()
-        cursor=conn.cursor()
+        cursor=conn.cursor(dictionary=True)
         cursor.execute(
             """
         SELECT * FROM agents
@@ -47,7 +47,7 @@ class AgentDB:
 
     def update_agent(id, data):
         conn=get_connection()
-        cursor=conn.cursor()
+        cursor=conn.cursor(dictionary=True)
         cursor.execute(
             """
         UPDATE agents where id=%s 
@@ -76,7 +76,7 @@ class AgentDB:
         conn.commit()
         cursor.close()
         conn.close()
-        return {"message":"Your agent has been deactivated successfully"}
+        return {"message":"Your agent %s has been deactivated successfully"(id)}
     
     def increment_completed(id):
         conn=get_connection()
