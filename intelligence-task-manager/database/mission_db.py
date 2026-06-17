@@ -59,14 +59,23 @@ class MissionDB:
         WHERE id = %s
             """(a_id, m_id)
         )
-        check=cursor.execute(
+        check_a=cursor.execute(
             """
         SELECT * FROM agents
         WHERE id = %s
             """(a_id)
         )
-        if check["is_active"]==False:
+        check_m=cursor.execute(
+            """
+        SELECT * FROM missions
+        WHERE id = %s
+            """(m_id)
+        )
+        if check_a["is_active"]==False:
             return {"message" : "Sorry, agent %s is inactive"(a_id)}
+        elif check_m["risk_level"]>=25:
+            if check_a["agent_rank"] != "Commander":
+                return {"message" : "Sorry, this mission is too dangerous for agent %s"(a_id)}
         cursor.execute(
             """
         UPDATE missions
