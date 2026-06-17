@@ -18,7 +18,7 @@ def create_database():
     conn.commit()
     cursor.close()
     conn.close()
-    
+
 def create_tables():
     conn=get_connection()
     cursor=conn.cursor()
@@ -28,7 +28,7 @@ CREATE TABLE agents IF NOT EXIST (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   specialty VARCHAR(255),
-  is_active VARCHAR(255) DEFAULT TRUE,
+  is_active BOOLEAN DEFAULT TRUE,
   completed_missions INT,
   failed_missions INT,
   agent_rank ENUM(Junior, Senior, Commander)
