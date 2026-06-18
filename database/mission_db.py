@@ -1,4 +1,4 @@
-from db_connection import get_connection, create_database, create_tables
+from database.db_connection import get_connection, create_database, create_tables
 
 class MissionDB:
     def create_mission(data):
@@ -7,11 +7,11 @@ class MissionDB:
         cursor.execute(
             """
         INSERT INTO missions (%s, %s, %s, %s, %s, %s, %s)
-            """,data("title", "description", "location", "difficulty", "importance", "status", "assigned_agent_id")
-        )
+            """,data["title"], data["description"], data["location"], data["difficulty"], data["importance"], data["status"], data["assigned_agent_id"])
         cursor.execute(
             """
-        INSERT INTO missions (risk_level)
+        INSERT INTO missions 
+        SET risk_level = %s
         VALUES("difficulty" * 2 + importance)
             """,
         )
@@ -48,8 +48,8 @@ class MissionDB:
         return row
     
     def assign_mission(m_id, a_id):
-        # if get_open_missions_by_agent(a_id)==3:
-        #     return {"message" : "Sorry, agent %s already has 3 open missions"(a_id)}
+        if MissionDB.get_open_missions_by_agent(a_id)==3:
+            return {"message" : "Sorry, agent %s already has 3 open missions"(a_id)}
         conn=get_connection()
         cursor=conn.cursor(dictionary=True)
         cursor.execute(
@@ -195,3 +195,105 @@ class MissionDB:
         conn.close()
         return winner
     
+    def count_completed_missions():
+        conn=get_connection()
+        cursor=conn.cursor()
+        cursor.execute(
+            """
+        SELECT SUM(completed_missions)
+        FROM missions
+            """
+        )
+        counts=cursor.fetchone()
+        cursor.close()
+        conn.close()
+        return counts
+    
+    def count_failed_missions():
+        conn=get_connection()
+        cursor=conn.cursor()
+        cursor.execute(
+            """
+        SELECT SUM(failed_missions)
+        FROM missions
+            """
+        )
+        counts=cursor.fetchone()
+        cursor.close()
+        conn.close()
+        return counts
+    
+    def count_only_open_missions():
+        conn=get_connection()
+        cursor=conn.cursor()
+        cursor.execute(
+            """
+        SELECT SUM(status)
+        FROM missions
+        WHERE status = "open" 
+            """
+        )
+        counts=cursor.fetchone()
+        cursor.close()
+        conn.close()
+        return counts
+
+    def count_in_progress_missions():
+            conn=get_connection()
+            cursor=conn.cursor()
+            cursor.execute(
+                """
+            SELECT SUM(status)
+            FROM missions
+            WHERE status = "in_progress" 
+                """
+            )
+            counts=cursor.fetchone()
+            cursor.close()
+            conn.close()
+            return counts
+    
+    def count_canceled_missions():
+        conn=get_connection()
+        cursor=conn.cursor()
+        cursor.execute(
+            """
+        SELECT SUM(status)
+        FROM missions
+        WHERE status = "canceled"
+            """
+        )
+        counts=cursor.fetchone()
+        cursor.close()
+        conn.close()
+        return counts
+    
+    def count_new_missions():
+        conn=get_connection()
+        cursor=conn.cursor()
+        cursor.execute(
+            """
+         SELECT SUM(status)
+        FROM missions
+        WHERE status = "new"
+            """
+        )
+        counts=cursor.fetchone()
+        cursor.close()
+        conn.close()
+        return counts
+    
+    def count_assigned_missions():
+        conn=get_connection()
+        cursor=conn.cursor()
+        cursor.execute(
+            """
+         SELECT SUM(status)
+        FROM missions
+        WHERE status = "assigned"
+            """
+        )
+        counts=cursor.fetchone()
+        cursor.close()
+        conn.close()
+        return counts

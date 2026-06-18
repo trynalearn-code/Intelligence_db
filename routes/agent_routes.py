@@ -22,3 +22,15 @@ def get_all_agents():
 @router.get("/{id}")
 def get_agent_by_id(id):
     return AgentDB.get_agent_by_id(id)
+
+@router.put("/{id}")
+def update_agent(id, data):
+    return AgentDB.update_agent(id, data)
+
+@router.put("/{id}/deactivate")
+def deactivate_agent(id):
+    return AgentDB.deactivate_agent(id)
+
+@router.get("{id}/performance")
+def get_agent_performance(id):
+    return AgentDB.get_agent_performance(id)

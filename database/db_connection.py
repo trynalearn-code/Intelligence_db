@@ -14,7 +14,7 @@ def create_database():
     conn=get_connection()
     cursor=conn.cursor()
     cursor.execute(
-        "CREATE DATABASE Intelligence_db"
+        "CREATE DATABASE Intelligence_db IF NOT EXIST"
     )
     conn.commit()
     cursor.close()

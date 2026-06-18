@@ -57,8 +57,7 @@ class AgentDB:
         SET completed_missions = %s
         SET failed_missions = %s 
         SET agent_rank = %s
-            """(id, data("name", "specialty", "is_active", "completed_missions", "failed_missions", "agent_rank"))
-        )
+            """(id, data["name"], data["specialty"], data["is_active"], data["completed_missions"], data["failed_missions"], data["agent_rank"]))
         conn.commit()
         cursor.close()
         conn.close()
@@ -69,7 +68,7 @@ class AgentDB:
         cursor=conn.cursor()
         cursor.execute(
             """
-        UPDATE agents where id=%s 
+        UPDATE agents WHERE id=%s 
         SET is_active = %s 
             """(id, "FALSE")
         )
@@ -97,7 +96,7 @@ class AgentDB:
         cursor=conn.cursor()
         cursor.execute(
             """
-        UPDATE agents where id=%s 
+        UPDATE agents WHERE id=%s 
         SET failed_missions = failed_missions + 1
             """(id,)
         )
