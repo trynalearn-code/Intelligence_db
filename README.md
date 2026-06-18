@@ -123,4 +123,5 @@ Intelligence-proj\Scripts\activate
 - mysql
 - docker
 - logging
+- swagger
 
