@@ -195,4 +195,3 @@ class MissionDB:
         conn.close()
         return winner
     
-    #

@@ -1,8 +1,10 @@
 # Description
 
-Intelligence_db is a RESTful project that incorporates mysql and docker. The project is written in Clean Code as well.
+Intelligence_db is a RESTful project that incorporates mysql, docker and fastapi. The project is written in Clean Code as well.
 
-Agents can be created, and data can be found about them. Agents are sent on missions of various difficulties and importance. Their risk level is measured and status is updated
+Agents can be created, and data can be found about them. Agents are sent on missions of various difficulties and importance. Their risk level is measured and status is updated. Furthermore, logging is present throughout in order to ensure easy debugging.
+
+Routes -> database -> mysql
 
 # Background
 
@@ -112,3 +114,13 @@ docker run -d --name intelligence-mysql -e MYSQL_ROOT_PASSWORD=1234 \
 ### Run on a virtual environment
 python -m venv Intelligence-proj
 Intelligence-proj\Scripts\activate
+
+## Required programs
+- python
+- uvicorn
+- fastapi
+- routers
+- mysql
+- docker
+- logging
+
