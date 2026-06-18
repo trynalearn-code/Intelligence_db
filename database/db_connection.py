@@ -1,13 +1,14 @@
 import mysql.connector
 
 def get_connection():
-    mysql.connector.connect(
+    return mysql.connector.connect(
         host = "127.0.0.1",
         port = 3306,
-        username = "root", # intelligence-mysql
-        password = "root", #1234
+        username = "root", 
+        password = "1234", 
         database = "Intelligence_db"
     )
+
 
 def create_database():
     conn=get_connection()
@@ -27,11 +28,11 @@ def create_tables():
 CREATE TABLE agents IF NOT EXIST (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
-  specialty VARCHAR(255),
+  specialty VARCHAR(255) NOT NULL,
   is_active BOOLEAN DEFAULT TRUE,
   completed_missions INT DEFAULT 0,
   failed_missions INT DEFAULT 0,
-  agent_rank ENUM(Junior, Senior, Commander)
+  agent_rank ENUM("Junior", "Senior", "Commander")
         """
 );
     cursor.execute(
@@ -39,7 +40,7 @@ CREATE TABLE agents IF NOT EXIST (
 CREATE TABLE missions IF NOT EXIST (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
-  description TEXT,
+  description TEXT NOT NULL,
   locaton VARCHAR(255),
   difficulty INT CHECK (1<= difficulty <=10),
   importance INT CHECK (1<= importance <=10),
@@ -51,5 +52,5 @@ CREATE TABLE missions IF NOT EXIST (
     conn.commmit()
     cursor.close()
     conn.close()
-    
+
     

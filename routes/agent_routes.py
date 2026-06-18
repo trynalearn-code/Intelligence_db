@@ -1,7 +1,6 @@
 from database.agent_db import AgentDB
 from fastapi import FastAPI, APIRouter, HTTPException
 
-
 router=APIRouter()
 
 
@@ -14,6 +13,12 @@ def create_agent(body:dict):
     validate("name", body)
     validate("specialty", body)
     validate("agent_rank", body)
-    AgentDB.create_database(body)
+    AgentDB.create_agent(body)
 
+@router.get("")
+def get_all_agents():
+    return AgentDB.get_all_agents()
 
+@router.get("/{id}")
+def get_agent_by_id(id):
+    return AgentDB.get_agent_by_id(id)
