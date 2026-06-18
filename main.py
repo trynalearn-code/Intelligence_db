@@ -1,13 +1,10 @@
 from database import db_connection
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, APIRouter
 import uvicorn
+from routes import agent_routes
 
 app=FastAPI()
-
-
-
-
-
+app.include_router(agent_routes.router, prefix="/agents")
 
 
 

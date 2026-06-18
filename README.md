@@ -1,6 +1,6 @@
 # Description
 
-Intelligence_db is a RESTful project that incorporates mysql, docker and fastapi. The project is written in Clean Code as well.
+Intelligence_db is a RESTful project that incorporates mysql, docker and fastapi. The project is written in Clean Code as well. The data is called through HTML
 
 Agents can be created, and data can be found about them. Agents are sent on missions of various difficulties and importance. Their risk level is measured and status is updated. Furthermore, logging is present throughout in order to ensure easy debugging.
 

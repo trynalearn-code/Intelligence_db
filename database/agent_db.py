@@ -1,4 +1,4 @@
-from db_connection import get_connection, create_database, create_tables
+from database.db_connection import get_connection, create_database, create_tables
 
 class AgentDB:
     
@@ -111,12 +111,12 @@ class AgentDB:
         cursor=conn.cursor()
         complete=cursor.execute(
             """
-        SELECT completed_missionis FROM agents WHERE id=%s 
+        SELECT completed_missions FROM agents WHERE id=%s 
             """(id)
         )
         failed=cursor.execute(
             """
-        SELECT completed_missionis FROM agents WHERE id=%s 
+        SELECT completed_missions FROM agents WHERE id=%s 
             """(id)
         )
         total= complete + failed
