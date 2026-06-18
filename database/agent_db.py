@@ -9,8 +9,12 @@ class AgentDB:
             """
         INSERT INTO agents (name, specialty, agent_rank)
         VALUES (%s, %s, %s) 
+            """, (data["name"], data["specialty"], data["agent_rank"])
+        )
+        cursor.execute(
+            """
         SELECT * FROM agents
-            """, data["name"], data["specialty"], data["agent_rank"]
+            """
         )
         conn.commit()
         rows=cursor.fetchall()

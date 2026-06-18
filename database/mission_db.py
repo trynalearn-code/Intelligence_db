@@ -7,7 +7,7 @@ class MissionDB:
         cursor.execute(
             """
         INSERT INTO missions (%s, %s, %s, %s, %s, %s, %s)
-            """,data["title"], data["description"], data["location"], data["difficulty"], data["importance"], data["status"], data["assigned_agent_id"])
+            """, (data["title"], data["description"], data["location"], data["difficulty"], data["importance"], data["status"], data["assigned_agent_id"]))
         cursor.execute(
             """
         INSERT INTO missions 
@@ -48,8 +48,6 @@ class MissionDB:
         return row
     
     def assign_mission(m_id, a_id):
-        if MissionDB.get_open_missions_by_agent(a_id)==3:
-            return {"message" : "Sorry, agent %s already has 3 open missions"(a_id)}
         conn=get_connection()
         cursor=conn.cursor(dictionary=True)
         cursor.execute(
@@ -71,11 +69,6 @@ class MissionDB:
         WHERE id = %s
             """(m_id)
         )
-        if check_a["is_active"]==False:
-            return {"message" : "Sorry, agent %s is inactive"(a_id)}
-        elif check_m["risk_level"]>=25:
-            if check_a["agent_rank"] != "Commander":
-                return {"message" : "Sorry, this mission is too dangerous for agent %s"(a_id)}
         cursor.execute(
             """
         UPDATE missions

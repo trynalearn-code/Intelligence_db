@@ -14,7 +14,7 @@ def create_database():
     conn=get_connection()
     cursor=conn.cursor()
     cursor.execute(
-        "CREATE DATABASE Intelligence_db IF NOT EXIST"
+        "CREATE DATABASE Intelligence_db IF NOT EXISTS"
     )
     conn.commit()
     cursor.close()
@@ -25,7 +25,7 @@ def create_tables():
     cursor=conn.cursor()
     cursor.execute(
         """
-CREATE TABLE agents IF NOT EXIST (
+CREATE TABLE agents IF NOT EXISTS (
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   specialty VARCHAR(255) NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE agents IF NOT EXIST (
 );
     cursor.execute(
         """
-CREATE TABLE missions IF NOT EXIST (
+CREATE TABLE missions IF NOT EXISTS (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
   description TEXT NOT NULL,
